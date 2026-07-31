@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 const App = () => {
@@ -16,7 +15,7 @@ const App = () => {
     <div>
       <h1>{count}</h1>
       <button onClick={()=>setCount(count+1)}>+</button>
-      {apiData.map((d,c)=>{
+      {apiData.map((d)=>{
        return(<>
          <h2>{d.title}&nbsp;&nbsp;&nbsp;&nbsp;{d.id}</h2>
          <h3>{d.userId}</h3>
