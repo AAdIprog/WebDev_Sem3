@@ -8,7 +8,6 @@ const Dem = () => {
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
   const [loading, setLoading] = useState(false)
-
   useEffect(() => {
     fetch('https://dummyjson.com/products')
       .then((res) => res.json())
