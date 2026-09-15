@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Northstar | Account access</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel" aria-label="Account access">
+        <div class="panel-heading">
+          <p class="eyebrow">WELCOME BACK</p>
+          <h2 id="form-title">Sign in to continue</h2>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Account actions">
+          <button class="tab active" data-mode="login" role="tab" aria-selected="true">Sign in</button>
+          <button class="tab" data-mode="signup" role="tab" aria-selected="false">Create account</button>
+        </div>
+        <form id="auth-form">
+          <label id="name-field" class="hidden">Full name<input id="name" name="name" type="text" autocomplete="name" /></label>
+          <label>Email address<input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required /></label>
+          <label>Password<input id="password" name="passWord" type="password" autocomplete="current-password" placeholder="••••••••" required minlength="6" /></label>
+          <button class="submit" type="submit"><span id="submit-label">Sign in</span><span class="arrow">↗</span></button>
+        </form>
+        <p id="message" class="message" role="status"></p>
+        <div id="dashboard" class="dashboard hidden">
+          <div class="dashboard-top"><span class="status-dot"></span><span>Authenticated</span></div>
+          <h3>Private space unlocked.</h3>
+          <p>Your session is active and the protected API is responding.</p>
+          <button id="logout" class="logout" type="button">Sign out</button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
