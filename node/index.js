@@ -6,6 +6,7 @@ let cors=require('cors')
 let app=  express()
 let User=  require('./db.js')
 let jwt=  require('jsonwebtoken')
+const { sendEmail } = require('./email.js')
 app.use(express.json())
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'public')))
@@ -87,6 +88,35 @@ app.get("/api",auth,(req,res)=>{
 app.get('/login',(req,res)=>{
    res.sendFile(path.join(__dirname,'public','index.html'))
 })
+
+app.post('/forgotPassword', async (req, res) => {
+   try {
+   const { email } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(404).send('User not found');
+  }
+
+  const resetToken = jwt.sign({ email: user.email }, 'resetTokenSecret', { expiresIn: '1h' });
+  user.resetToken = resetToken;
+  user.resetTokenExpiration = Date.now() + 3600000; // 1 hour
+
+  await user.save();
+
+  await sendEmail(
+    email,
+    'Password Reset',
+    `You have requested a password reset. Click the link to reset your password: http://localhost:3000/resetPassword?token=${resetToken}`
+  );
+
+  res.send('Password reset email sent');
+   } catch (error) {
+      console.error('forgot password error', error);
+      res.status(500).send('Unable to send password reset email');
+   }
+});
 
 app.listen(3000,()=>{
    console.log("server on 3k")

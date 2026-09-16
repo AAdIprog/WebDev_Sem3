@@ -5,6 +5,8 @@ let userSchema=  new mongoose.Schema({
     email:String,
     passWord:String,
     userId:String,
+    resetToken:String,
+    resetTokenExpiration:Date,
     role:{
         type:String,
         emun:["user",'admin'],
